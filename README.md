@@ -5,11 +5,36 @@ How does the logback transfer the log to logstash? Try this demo
 
 Step1: 添加下面maven依赖
 ```
-<dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
+```
+
+Step2: 配置logback.xml
+```
+<configuration debug="true">
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <springProperty scope="context" name="applicationName" source="spring.application.name"/>
+    <springProperty scope="context" name="logstash-server" source="spring.logstash.server"/>
+    <!-- Example for logging into the build folder of your project -->
+
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <remoteHost>${logstash-server}</remoteHost>
+        <port>5000</port>
+        <!-- encoder is required -->
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"applicationName":"${applicationName}"}</customFields>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="logstash"/>
+    </root>
+
+</configuration>
 ```
 
 最终测试截图如下：
