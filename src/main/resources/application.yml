@@ -1,0 +1,10 @@
+server:
+    port: 9300
+
+spring:
+    application:
+        name: logback-logstash-demo
+
+    logstash:
+        server: 10.160.10.51
+
