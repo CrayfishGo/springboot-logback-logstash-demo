@@ -8,3 +8,9 @@ spring:
     logstash:
         server: 10.160.10.51
 
+logback:
+    path: ${user.home}/logs
+    maxFileSize: 10MB
+    maxHistory: 90
+    level: INFO
+    fileName: demo
