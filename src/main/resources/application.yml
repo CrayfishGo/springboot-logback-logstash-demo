@@ -8,6 +8,18 @@ spring:
     logstash:
         server: 10.160.10.51
 
+    jackson:
+        time-zone: GMT+8
+        date-format: yyyy-MM-dd HH:mm:ss
+    http:
+        encoding:
+            enabled: true
+            charset: UTF-8
+            force: true
+        multipart:
+            maxFileSize: 50MB
+            maxRequestSize: 50MB
+
 logback:
     path: ${user.home}/logs
     maxFileSize: 10MB
