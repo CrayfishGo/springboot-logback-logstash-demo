@@ -5,9 +5,6 @@ spring:
     application:
         name: logback-logstash-demo
 
-    logstash:
-        server: 10.160.10.51
-
     jackson:
         time-zone: GMT+8
         date-format: yyyy-MM-dd HH:mm:ss
@@ -20,9 +17,9 @@ spring:
             maxFileSize: 50MB
             maxRequestSize: 50MB
 
-logback:
-    path: ${user.home}/logs
-    maxFileSize: 10MB
-    maxHistory: 90
-    level: INFO
-    fileName: demo
+elk:
+    enable: true
+    logstash:
+        server: 10.160.10.51
+        port: 5000
+
